@@ -577,6 +577,7 @@ class EuchreGame {
         const abs = (pi + offset) % N;
         return {
           name: this.players[abs].name,
+          id: this.players[abs].id,
           cardCount: this.players[abs].hand.length,
           team: this.players[abs].team,
           isDealer: abs === this.dealer

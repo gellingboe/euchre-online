@@ -355,8 +355,28 @@ class GameScene extends Phaser.Scene {
       this.statusLine.setText('');
 
     } else if (state.state === 'hand_complete') {
-      if (state.lastHandResult) this._showMsg(state.lastHandResult.description);
-      this.statusLine.setText('Next hand starting...');
+      var handSummary = '';
+      if (state.lastHandResult) {
+        handSummary += state.lastHandResult.description + '\n';
+      }
+      if (state.gameMode === 'ffa') {
+        var parts = [];
+        for (var hi = 0; hi < state.players.length; hi++) {
+          var nm = hi === 0 ? 'You' : state.players[hi].name;
+          parts.push(nm + ': ' + state.tricksWon[hi] + ' tricks');
+        }
+        handSummary += parts.join('  |  ') + '\n';
+        var scoreParts = [];
+        for (var si = 0; si < state.players.length; si++) {
+          var sn = si === 0 ? 'You' : state.players[si].name;
+          scoreParts.push(sn + ': ' + state.scores[si]);
+        }
+        handSummary += 'Score: ' + scoreParts.join('  |  ');
+      } else {
+        handSummary += 'Tricks — Us: ' + state.tricksWon[0] + '  Them: ' + state.tricksWon[1] + '\n';
+        handSummary += 'Score — Us: ' + state.scores[0] + '  Them: ' + state.scores[1];
+      }
+      this._showHandSummary(handSummary);
 
     } else if (state.state === 'game_over') {
       var won = state.scores[0] >= 10;
@@ -532,6 +552,27 @@ class GameScene extends Phaser.Scene {
     container.add(bg);
     container.setSize(w, h);
     return container;
+  }
+
+  _showHandSummary(text) {
+    var lines = text.split('\n');
+    var startY = 210;
+    var lineSpacing = 24;
+    for (var i = 0; i < lines.length; i++) {
+      var fontSize = i === 0 ? '20px' : '13px';
+      var color = i === 0 ? '#FFD700' : '#ccc';
+      var label = this.add.text(CW / 2, startY + i * lineSpacing, lines[i], {
+        fontSize: fontSize, color: color, fontStyle: i === 0 ? 'bold' : 'normal',
+        fontFamily: 'Arial', align: 'center',
+        wordWrap: { width: CW - 40 }
+      }).setOrigin(0.5).setDepth(200);
+      this.dynamicObjects.push(label);
+    }
+    var nextLabel = this.add.text(CW / 2, startY + lines.length * lineSpacing + 12, 'Next hand starting...', {
+      fontSize: '11px', color: '#888', fontFamily: 'Arial'
+    }).setOrigin(0.5).setDepth(200);
+    this.dynamicObjects.push(nextLabel);
+    this.statusLine.setText('');
   }
 
   _showMsg(text) {

@@ -126,7 +126,6 @@ io.on('connection', (socket) => {
 
     const result = game.startGame();
     if (result.error) return socket.emit('error', { message: result.error });
-    broadcastState(game);
 
     const playerIds = game.players.map(p => p.id);
     for (const player of game.players) {
@@ -135,6 +134,8 @@ io.on('connection', (socket) => {
         if (s) s.emit('voice-ready', { playerIds });
       }
     }
+
+    broadcastState(game);
   });
 
   socket.on('bid', ({ action, suit, alone }) => {
