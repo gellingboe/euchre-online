@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Card Games Online</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♠</text></svg>">
+</head>
+<body>
+  <div id="lobby">
+    <div class="lobby-card">
+      <h1><span class="red">♥</span> Card Games <span class="black">♠</span></h1>
+      <h2>Online</h2>
+
+      <div id="login-section">
+        <input type="text" id="player-name" placeholder="Your name" maxlength="12" autocomplete="off">
+        <div class="game-type-selector">
+          <button id="pick-euchre" class="game-pick active" data-game="euchre">♠ Euchre</button>
+          <button id="pick-hearts" class="game-pick" data-game="hearts">♥ Hearts</button>
+        </div>
+        <button id="create-btn" class="btn btn-primary">Create Game</button>
+        <div class="divider">— or join a friend —</div>
+        <input type="text" id="room-code-input" placeholder="Room code (e.g. ABCD)" maxlength="4" autocomplete="off">
+        <button id="join-btn" class="btn btn-secondary">Join Game</button>
+      </div>
+
+      <div id="room-section" style="display:none">
+        <div class="room-code-display">
+          Room: <span id="room-code-text"></span>
+        </div>
+        <p class="share-text">Share this code with your friends!</p>
+        <div id="player-list"></div>
+        <button id="start-btn" class="btn btn-primary" style="display:none">Start Game</button>
+        <p id="waiting-text" class="waiting">Waiting for players...</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="game-container" style="display:none"></div>
+
+  <div id="voice-controls" style="display:none">
+    <button id="mic-toggle" class="voice-btn" title="Toggle microphone">🎙</button>
+    <span id="voice-status" class="voice-status"></span>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/game.js"></script>
+  <script src="/js/hearts-game.js"></script>
+  <script src="/js/voice-chat.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

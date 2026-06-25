@@ -1,0 +1,200 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #1a472a;
+  color: #fff;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#lobby {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 20px;
+}
+
+.lobby-card {
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 16px;
+  padding: 32px 28px;
+  text-align: center;
+  max-width: 360px;
+  width: 100%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.lobby-card h1 {
+  font-size: 2.4em;
+  margin-bottom: 0;
+  letter-spacing: 2px;
+}
+.lobby-card h1 .red { color: #e74c3c; }
+.lobby-card h1 .black { color: #ddd; }
+
+.lobby-card h2 {
+  font-size: 1.1em;
+  color: #8fbc8f;
+  margin-bottom: 28px;
+  font-weight: 300;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  font-size: 16px;
+  margin-bottom: 12px;
+  outline: none;
+  transition: border-color 0.2s;
+  text-transform: uppercase;
+}
+input#player-name { text-transform: none; }
+input[type="text"]::placeholder { color: rgba(255,255,255,0.4); text-transform: none; }
+input[type="text"]:focus { border-color: #4CAF50; }
+
+.btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.1s, background 0.2s;
+  letter-spacing: 0.5px;
+}
+.btn:active { transform: scale(0.97); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-primary { background: #4CAF50; color: white; }
+.btn-primary:hover:not(:disabled) { background: #43a047; }
+.btn-secondary { background: #2196F3; color: white; }
+.btn-secondary:hover:not(:disabled) { background: #1e88e5; }
+
+.divider {
+  color: rgba(255,255,255,0.35);
+  margin: 20px 0;
+  font-size: 13px;
+}
+
+.room-code-display { font-size: 1.3em; margin-bottom: 6px; }
+.room-code-display span {
+  font-weight: bold;
+  font-size: 1.6em;
+  color: #FFD700;
+  letter-spacing: 6px;
+}
+
+.share-text { color: #8fbc8f; font-size: 13px; margin-bottom: 20px; }
+.waiting { color: rgba(255,255,255,0.5); font-size: 13px; margin-top: 14px; }
+
+#player-list { text-align: left; margin: 16px 0; }
+
+.player-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 8px;
+  margin-bottom: 6px;
+  font-size: 15px;
+}
+
+.team-badge {
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.team-0 { background: #c0392b; }
+.team-1 { background: #2471a3; }
+.team-2 { background: #27ae60; }
+
+.mode-preview {
+  color: #FFD700;
+  font-weight: 600;
+}
+
+#game-container {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0d3318;
+}
+
+.game-type-selector {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.game-pick {
+  flex: 1;
+  padding: 12px 8px;
+  border: 2px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.5);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.game-pick:hover { border-color: rgba(255,255,255,0.3); color: rgba(255,255,255,0.7); }
+.game-pick.active {
+  border-color: #4CAF50;
+  color: #fff;
+  background: rgba(76,175,80,0.2);
+}
+
+#voice-controls {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.voice-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.3);
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.voice-btn:hover { border-color: rgba(255,255,255,0.5); }
+.voice-btn.muted {
+  background: rgba(231,76,60,0.7);
+  border-color: #e74c3c;
+}
+.voice-status {
+  color: rgba(255,255,255,0.6);
+  font-size: 11px;
+  font-family: Arial, sans-serif;
+  transition: opacity 0.3s;
+}
